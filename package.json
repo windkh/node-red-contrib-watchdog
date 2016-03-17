@@ -1,0 +1,21 @@
+{
+    "name": "node-red-contrib-watchdog",
+    "version": "1.0.0",
+    "description": "Watchdog node.",
+    "dependencies": {
+    },
+    "node-red" : {
+        "nodes": {
+            "watchdog": "watchdog/99-watchdog.js"
+        }
+    },
+    "keywords": [
+        "node-red", "watchdog"
+    ],
+    "repository" :
+    { "type" : "git"
+    , "url" : "https://github.com/windkh/node-red-contrib-watchdog"
+    },
+    "author": "Karl-Heinz Wind",
+    "license": "MIT"
+}

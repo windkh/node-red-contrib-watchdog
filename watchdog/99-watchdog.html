@@ -1,0 +1,37 @@
+<!-- Created by Karl-Heinz Wind -->
+
+
+<!-- ------------------------------------------------------------------------------------------ -->
+<script type="text/javascript">
+    RED.nodes.registerType('watchdog', {
+        category: 'advanced',
+        color: '#FFAAAA',
+        defaults: {
+            name: { value: "" },
+            timeoutseconds: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "alert.png",
+        label: function () {
+            return this.name || "watchdog";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="watchdog">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timeoutseconds"><i class="icon-tag"></i> Timeout [s]</label>
+        <input type="text" id="node-input-timeoutseconds">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="watchdog">
+    <p>A watchdog node that triggers the output when the input was not triggered for a specified time. The timer ist started with the first call on the input.</p>
+</script>
+
+<!-- ------------------------------------------------------------------------------------------ -->
