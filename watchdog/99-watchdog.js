@@ -11,9 +11,9 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, config);
         var node = this;
         this.timeout = config.timeoutseconds;
-        
         this.pollInterval = 1 * 1000; // 1s
         this.lastUpdate = new Date().getTime();
+        var started = false;
 
         this.startTimer = function () {
             node.timer = setInterval(function () {
@@ -27,13 +27,14 @@ module.exports = function(RED) {
                 }                
             }, node.pollInterval);
             node.status({ fill: "green", shape: "dot", text: "armed" });
+            started = true;
         }
         
         this.stopTimer = function () {
             if (node.timer) {
-                clearTimeout(node.timer);
-                node.timer = undefined;
-                node.status({});
+                clearInterval(node.timer);
+                node.status({ fill: "yellow", shape: "dot", text: "stopped" });
+                started = false;
             }   
         }
 
@@ -41,7 +42,7 @@ module.exports = function(RED) {
             if (node.timeout) {
                 node.lastUpdate = new Date().getTime();
 
-                if (this.timeout && !node.timer) {
+                if (node.timeout && !started) {
                     node.startTimer();
                 }
             }
@@ -52,7 +53,7 @@ module.exports = function(RED) {
         });
 
         this.on('close', function (msg) {
-        //    node.stopTimer();
+            node.stopTimer();
         });
     }
 
